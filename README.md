@@ -31,7 +31,7 @@ dagger run fluentci chromatic_pipeline
 You can also use this pipeline programmatically:
 
 ```typescript
-import { Client , connect } from "@dagger.io/dagger";
+import { Client, connect } from "@dagger.io/dagger";
 import { Dagger } from "https://deno.land/x/chromatic_pipeline/mod.ts";
 
 const { publish} = Dagger;
