@@ -2,8 +2,8 @@ const command = new Deno.Command(Deno.execPath(), {
   args: [
     "run",
     "-A",
-    "--import-map=https://deno.land/x/symfony_pipeline/import_map.json",
-    "https://deno.land/x/symfony_pipeline/src/dagger/runner.ts",
+    "--import-map=https://deno.land/x/chromatic_pipeline/import_map.json",
+    "https://deno.land/x/chromatic_pipeline/src/dagger/runner.ts",
   ],
 });
 
