@@ -40,7 +40,7 @@ export const publish = async (client: Client, src = ".") => {
       "CHROMATIC_PROJECT_TOKEN",
       Deno.env.get("CHROMATIC_PROJECT_TOKEN")!
     )
-    .withExec(["sh", "-c", "devbox global run -- bun x chromatic --help"]);
+    .withExec(["sh", "-c", "devbox global run -- bun x chromatic"]);
 
   const result = await ctr.stdout();
 
