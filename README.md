@@ -4,7 +4,7 @@
 ![deno compatibility](https://shield.deno.dev/deno/^1.34)
 [![](https://img.shields.io/codecov/c/gh/fluent-ci-templates/chromatic-pipeline)](https://codecov.io/gh/fluent-ci-templates/chromatic-pipeline)
 
-A ready-to-use CI/CD Pipeline for your [Chromatic](https://www.chromatic.com/) Projects. Publishes your Storybook to Chromatic and kicks off tests if they're enabled.
+A ready-to-use CI/CD Pipeline for your [Chromatic](https://chromatic.com/) Projects. Publishes your Storybook to Chromatic and kicks off tests if they're enabled.
 
 ## 🚀 Usage
 
