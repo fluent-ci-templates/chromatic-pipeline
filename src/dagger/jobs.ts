@@ -31,6 +31,7 @@ export const publish = async (client: Client, src = ".") => {
       "/root/.bun/install/cache",
       client.cacheVolume("bun-cache")
     )
+    .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withEnvVariable("NIX_INSTALLER_NO_CHANNEL_ADD", "1")
     .withDirectory("/app", context, {
       exclude: [".git", ".devbox", "node_modules", ".fluentci"],
@@ -40,6 +41,7 @@ export const publish = async (client: Client, src = ".") => {
       "CHROMATIC_PROJECT_TOKEN",
       Deno.env.get("CHROMATIC_PROJECT_TOKEN")!
     )
+    .withExec(["sh", "-c", "devbox global run -- bun install"])
     .withExec(["sh", "-c", "devbox global run -- bun x chromatic"]);
 
   const result = await ctr.stdout();
