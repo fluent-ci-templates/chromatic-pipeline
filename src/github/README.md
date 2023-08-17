@@ -1,6 +1,6 @@
 # Github Actions
 
-The following command will generate a `.github/workflows/deploy.yml` file in your project:
+The following command will generate a `.github/workflows/publish.yml` file in your project:
 
 ```bash
 fluentci gh init -t chromatic_pipeline
