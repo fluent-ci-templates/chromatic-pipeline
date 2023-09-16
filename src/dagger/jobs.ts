@@ -1,9 +1,11 @@
 import Client from "@fluentci.io/dagger";
-import { withDevbox } from "https://deno.land/x/nix_installer_pipeline@v0.4.1/src/dagger/steps.ts";
+import { withDevbox } from "https://nix.fluentci.io/v0.4.1/src/dagger/steps.ts";
 
 export enum Job {
   publish = "publish",
 }
+
+export const exclude = [".git", ".devbox", "node_modules", ".fluentci"];
 
 export const publish = async (client: Client, src = ".") => {
   const context = client.host().directory(src);
@@ -33,9 +35,7 @@ export const publish = async (client: Client, src = ".") => {
     )
     .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withEnvVariable("NIX_INSTALLER_NO_CHANNEL_ADD", "1")
-    .withDirectory("/app", context, {
-      exclude: [".git", ".devbox", "node_modules", ".fluentci"],
-    })
+    .withDirectory("/app", context, { exclude })
     .withWorkdir("/app")
     .withEnvVariable(
       "CHROMATIC_PROJECT_TOKEN",

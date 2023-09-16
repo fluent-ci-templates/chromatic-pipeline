@@ -32,10 +32,8 @@ dagger run fluentci chromatic_pipeline
 You can also use this pipeline programmatically:
 
 ```typescript
-import Client, { connect } from "https://sdk.fluentci.io/mod.ts";
-import { Dagger } from "https://pkg.fluentci.io/chromatic_pipeline/mod.ts";
-
-const { publish } = Dagger;
+import Client, { connect } from "https://sdk.fluentci.io/v0.1.7/mod.ts";
+import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.5.0/mod.ts";
 
 function pipeline(src = ".") {
   connect(async (client: Client) => {
