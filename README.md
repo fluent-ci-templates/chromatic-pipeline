@@ -32,15 +32,8 @@ dagger run fluentci chromatic_pipeline
 You can also use this pipeline programmatically:
 
 ```typescript
-import Client, { connect } from "https://sdk.fluentci.io/v0.1.9/mod.ts";
-import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.5.1/mod.ts";
+import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.6.0/mod.ts";
 
-function pipeline(src = ".") {
-  connect(async (client: Client) => {
-    await publish(client, src);
-  });
-}
-
-pipeline();
+await publish();
 
 ```
