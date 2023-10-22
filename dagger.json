@@ -1,0 +1,5 @@
+{
+  "root": "",
+  "name": "chromatic",
+  "sdkRuntime": "tsiry/dagger-sdk-deno"
+}

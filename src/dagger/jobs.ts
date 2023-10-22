@@ -1,4 +1,4 @@
-import Client, { withDevbox } from "../../deps.ts";
+import Client, { CacheSharingMode, connect } from "../../deps.ts";
 
 export enum Job {
   publish = "publish",
@@ -6,60 +6,53 @@ export enum Job {
 
 export const exclude = [".git", ".devbox", "node_modules", ".fluentci"];
 
-export const publish = async (client: Client, src = ".") => {
-  const context = client.host().directory(src);
+export const publish = async (src = ".", token?: string) => {
+  await connect(async (client: Client) => {
+    const context = client.host().directory(src);
 
-  if (!Deno.env.get("CHROMATIC_PROJECT_TOKEN")) {
-    throw new Error("CHROMATIC_PROJECT_TOKEN is not set");
-  }
+    if (!Deno.env.get("CHROMATIC_PROJECT_TOKEN") && !token) {
+      throw new Error("CHROMATIC_PROJECT_TOKEN is not set");
+    }
 
-  const ctr = withDevbox(
-    client
+    const ctr = client
       .pipeline(Job.publish)
       .container()
-      .from("alpine:latest")
-      .withExec(["apk", "update"])
-      .withExec(["apk", "add", "curl", "bash"])
-      .withMountedCache("/nix", client.cacheVolume("nix"))
-      .withMountedCache("/etc/nix", client.cacheVolume("nix-etc"))
-  )
-    .withMountedCache(
-      "/root/.local/share/devbox/global",
-      client.cacheVolume("devbox-global")
-    )
-    .withExec(["devbox", "global", "add", "nodejs@18.16.1", "bun@0.7.0"])
-    .withMountedCache(
-      "/root/.bun/install/cache",
-      client.cacheVolume("bun-cache")
-    )
-    .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
-    .withEnvVariable("NIX_INSTALLER_NO_CHANNEL_ADD", "1")
-    .withDirectory("/app", context, { exclude })
-    .withWorkdir("/app")
-    .withEnvVariable(
-      "CHROMATIC_PROJECT_TOKEN",
-      Deno.env.get("CHROMATIC_PROJECT_TOKEN")!
-    )
-    .withExec(["sh", "-c", "devbox global run -- bun install"])
-    .withExec(["sh", "-c", "devbox global run -- bun x chromatic"]);
+      .from("ghcr.io/fluentci-io/bun:latest")
+      .withExec(["mv", "/nix/store", "/nix/store-orig"])
+      .withMountedCache("/nix/store", client.cacheVolume("nix-cache"), {
+        sharing: CacheSharingMode.Shared,
+      })
+      .withExec(["sh", "-c", "cp -r /nix/store-orig/* /nix/store/"])
+      .withMountedCache(
+        "/root/.bun/install/cache",
+        client.cacheVolume("bun-cache")
+      )
+      .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
+      .withEnvVariable("NIX_INSTALLER_NO_CHANNEL_ADD", "1")
+      .withDirectory("/app", context, { exclude })
+      .withWorkdir("/app")
+      .withEnvVariable(
+        "CHROMATIC_PROJECT_TOKEN",
+        Deno.env.get("CHROMATIC_PROJECT_TOKEN") || token!
+      )
+      .withExec(["sh", "-c", "devbox global run -- bun install"])
+      .withExec(["sh", "-c", "devbox global run -- bun x chromatic"]);
 
-  const result = await ctr.stdout();
+    const result = await ctr.stdout();
 
-  console.log(result);
+    console.log(result);
+  });
+  return "Done";
 };
 
-export type JobExec = (
-  client: Client,
-  src?: string
-) =>
-  | Promise<void>
+export type JobExec = (src?: string) =>
+  | Promise<string>
   | ((
-      client: Client,
       src?: string,
       options?: {
         ignore: string[];
       }
-    ) => Promise<void>);
+    ) => Promise<string>);
 
 export const runnableJobs: Record<Job, JobExec> = {
   [Job.publish]: publish,
