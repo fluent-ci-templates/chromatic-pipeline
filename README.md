@@ -36,7 +36,7 @@ publish(src: String!, token: String!): String
 You can also use this pipeline programmatically:
 
 ```typescript
-import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.6.0/mod.ts";
+import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.6.1/mod.ts";
 
 await publish();
 
