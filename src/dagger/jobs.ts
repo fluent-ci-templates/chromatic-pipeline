@@ -18,6 +18,8 @@ export const publish = async (src = ".", token?: string) => {
       .pipeline(Job.publish)
       .container()
       .from("ghcr.io/fluentci-io/pkgx:latest")
+      .withExec(["apt-get", "update"])
+      .withExec(["apt-get", "install", "-y", "build-essential"])
       .withExec(["pkgx", "install", "node@18", "bun"])
       .withMountedCache(
         "/root/.bun/install/cache",
