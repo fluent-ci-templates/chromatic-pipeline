@@ -12,7 +12,7 @@ A ready-to-use CI/CD Pipeline for your [Chromatic](https://chromatic.com/) Proje
 Run the following command:
 
 ```bash
-dagger run fluentci chromatic_pipeline
+fluentci run chromatic_pipeline
 ```
 
 ## Environment Variables
