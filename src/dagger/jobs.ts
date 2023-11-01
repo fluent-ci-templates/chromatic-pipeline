@@ -21,7 +21,14 @@ export const publish = async (src = ".", token?: string) => {
       .from("ghcr.io/fluentci-io/pkgx:latest")
       .withExec(["apt-get", "update"])
       .withExec(["apt-get", "install", "-y", "build-essential"])
-      .withExec(["pkgx", "install", "node@18", "bun", "git"])
+      .withExec([
+        "pkgx",
+        "install",
+        "node@18",
+        "bun",
+        "git",
+        "classic.yarnpkg.com",
+      ])
       .withMountedCache(
         "/root/.bun/install/cache",
         client.cacheVolume("bun-cache")
@@ -33,7 +40,7 @@ export const publish = async (src = ".", token?: string) => {
         "CHROMATIC_PROJECT_TOKEN",
         Deno.env.get("CHROMATIC_PROJECT_TOKEN") || token!
       )
-      .withExec(["bun", "install"])
+      .withExec(["yarn", "install"])
       .withExec(["bunx", `chromatic@${VERSION}`]);
 
     await ctr.stdout();
