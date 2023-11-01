@@ -4,7 +4,7 @@ export enum Job {
   publish = "publish",
 }
 
-export const exclude = [".git", ".devbox", "node_modules", ".fluentci"];
+export const exclude = [".devbox", "node_modules", ".fluentci"];
 
 export const publish = async (src = ".", token?: string) => {
   await connect(async (client: Client) => {
@@ -20,7 +20,7 @@ export const publish = async (src = ".", token?: string) => {
       .from("ghcr.io/fluentci-io/pkgx:latest")
       .withExec(["apt-get", "update"])
       .withExec(["apt-get", "install", "-y", "build-essential"])
-      .withExec(["pkgx", "install", "node@18", "bun"])
+      .withExec(["pkgx", "install", "node@18", "bun", "git"])
       .withMountedCache(
         "/root/.bun/install/cache",
         client.cacheVolume("bun-cache")
