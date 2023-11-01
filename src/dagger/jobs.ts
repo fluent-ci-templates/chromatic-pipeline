@@ -1,4 +1,4 @@
-import Client, { CacheSharingMode, connect } from "../../deps.ts";
+import Client, { connect } from "../../deps.ts";
 
 export enum Job {
   publish = "publish",
@@ -17,30 +17,23 @@ export const publish = async (src = ".", token?: string) => {
     const ctr = client
       .pipeline(Job.publish)
       .container()
-      .from("ghcr.io/fluentci-io/bun:latest")
-      .withExec(["mv", "/nix/store", "/nix/store-orig"])
-      .withMountedCache("/nix/store", client.cacheVolume("nix-cache"), {
-        sharing: CacheSharingMode.Shared,
-      })
-      .withExec(["sh", "-c", "cp -r /nix/store-orig/* /nix/store/"])
+      .from("ghcr.io/fluentci-io/pkgx:latest")
+      .withExec(["pkgx", "install", "node@18", "bun"])
       .withMountedCache(
         "/root/.bun/install/cache",
         client.cacheVolume("bun-cache")
       )
       .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
-      .withEnvVariable("NIX_INSTALLER_NO_CHANNEL_ADD", "1")
       .withDirectory("/app", context, { exclude })
       .withWorkdir("/app")
       .withEnvVariable(
         "CHROMATIC_PROJECT_TOKEN",
         Deno.env.get("CHROMATIC_PROJECT_TOKEN") || token!
       )
-      .withExec(["sh", "-c", "devbox global run -- bun install"])
-      .withExec(["sh", "-c", "devbox global run -- bun x chromatic"]);
+      .withExec(["bun", "install"])
+      .withExec(["bunx", "chromatic"]);
 
-    const result = await ctr.stdout();
-
-    console.log(result);
+    await ctr.stdout();
   });
   return "Done";
 };
