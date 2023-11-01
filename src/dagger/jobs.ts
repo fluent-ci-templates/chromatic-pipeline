@@ -41,7 +41,7 @@ export const publish = async (src = ".", token?: string) => {
         Deno.env.get("CHROMATIC_PROJECT_TOKEN") || token!
       )
       .withExec(["yarn", "install"])
-      .withExec(["bunx", `chromatic@${VERSION}`]);
+      .withExec(["bunx", `chromatic@${VERSION}`, "--exit-zero-on-changes"]);
 
     await ctr.stdout();
   });
