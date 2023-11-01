@@ -9,6 +9,7 @@ export const exclude = [".devbox", "node_modules", ".fluentci"];
 export const publish = async (src = ".", token?: string) => {
   await connect(async (client: Client) => {
     const context = client.host().directory(src);
+    const VERSION = Deno.env.get("CHROMATIC_VERSION") || "latest";
 
     if (!Deno.env.get("CHROMATIC_PROJECT_TOKEN") && !token) {
       throw new Error("CHROMATIC_PROJECT_TOKEN is not set");
@@ -33,7 +34,7 @@ export const publish = async (src = ".", token?: string) => {
         Deno.env.get("CHROMATIC_PROJECT_TOKEN") || token!
       )
       .withExec(["bun", "install"])
-      .withExec(["bunx", "chromatic"]);
+      .withExec(["bunx", `chromatic@${VERSION}`]);
 
     await ctr.stdout();
   });

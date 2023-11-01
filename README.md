@@ -17,9 +17,10 @@ fluentci run chromatic_pipeline
 
 ## Environment Variables
 
-| Variable                | Description                   |
-|-------------------------|-------------------------------|
-| CHROMATIC_PROJECT_TOKEN | Your Chromatic Project Token. |
+| Variable                | Description                                         |
+|-------------------------|-----------------------------------------------------|
+| CHROMATIC_PROJECT_TOKEN | Your Chromatic Project Token.                       |
+| CHROMATIC_VERSION       | The version of Chromatic CLI. Defaults to `latest`. |
 
 ## Jobs
 
@@ -36,7 +37,7 @@ publish(src: String!, token: String!): String
 You can also use this pipeline programmatically:
 
 ```typescript
-import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.6.3/mod.ts";
+import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.6.4/mod.ts";
 
 await publish();
 
