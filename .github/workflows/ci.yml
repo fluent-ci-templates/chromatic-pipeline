@@ -13,8 +13,8 @@ jobs:
       - name: Setup Fluent CI
         uses: fluentci-io/setup-fluentci@v1
       - name: Run Dagger Pipelines
-        run: dagger run fluentci . fmt lint test
+        run: fluentci run . fmt lint test
       - name: Upload to Codecov
-        run: dagger run fluentci codecov_pipeline
+        run: fluentci run codecov_pipeline
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
