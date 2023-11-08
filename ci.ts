@@ -1,3 +1,3 @@
-import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.6.5/mod.ts";
+import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.7.0/mod.ts";
 
 await publish();
