@@ -29,7 +29,7 @@ fluentci run chromatic_pipeline
 | publish | Publishes your Storybook to Chromatic. |
 
 ```graphql
-publish(src: String!, token: String!): String
+publish(src: String, token: String!): String
 ```
 
 ## Programmatic usage
