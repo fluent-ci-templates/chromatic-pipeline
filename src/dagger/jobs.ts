@@ -1,5 +1,6 @@
-import Client from "../../deps.ts";
+import Client, { Directory } from "../../deps.ts";
 import { connect } from "../../sdk/connect.ts";
+import { getDirectory } from "./lib.ts";
 
 export enum Job {
   publish = "publish",
@@ -7,9 +8,12 @@ export enum Job {
 
 export const exclude = [".devbox", "node_modules", ".fluentci"];
 
-export const publish = async (src = ".", token?: string) => {
+export const publish = async (
+  src: string | Directory | undefined = ".",
+  token?: string
+) => {
   await connect(async (client: Client) => {
-    const context = client.host().directory(src);
+    const context = getDirectory(client, src);
     const VERSION = Deno.env.get("CHROMATIC_VERSION") || "latest";
 
     if (!Deno.env.get("CHROMATIC_PROJECT_TOKEN") && !token) {
