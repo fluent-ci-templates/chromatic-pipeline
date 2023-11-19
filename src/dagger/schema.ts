@@ -14,10 +14,11 @@ const Query = queryType({
   definition(t) {
     t.string("publish", {
       args: {
-        src: nonNull(stringArg()),
+        src: stringArg(),
         token: nonNull(stringArg()),
       },
-      resolve: async (_root, args, _ctx) => await publish(args.src),
+      resolve: async (_root, args, _ctx) =>
+        await publish(args.src || undefined, args.token),
     });
   },
 });

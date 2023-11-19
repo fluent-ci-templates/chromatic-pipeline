@@ -3,5 +3,5 @@
 
 
 type Query {
-  publish(src: String!, token: String!): String
+  publish(src: String, token: String!): String
 }

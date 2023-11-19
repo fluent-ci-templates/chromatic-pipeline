@@ -56,7 +56,7 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Query: {
     publish: { // args
-      src: string; // String!
+      src?: string | null; // String
       token: string; // String!
     }
   }
