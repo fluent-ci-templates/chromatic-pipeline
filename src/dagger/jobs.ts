@@ -1,6 +1,6 @@
-import Client, { Directory } from "../../deps.ts";
+import Client, { Directory, Secret } from "../../deps.ts";
 import { connect } from "../../sdk/connect.ts";
-import { getDirectory } from "./lib.ts";
+import { getDirectory, getChromaticToken } from "./lib.ts";
 
 export enum Job {
   publish = "publish",
@@ -10,14 +10,16 @@ export const exclude = [".devbox", "node_modules", ".fluentci"];
 
 export const publish = async (
   src: string | Directory | undefined = ".",
-  token?: string
+  token?: string | Secret
 ) => {
   await connect(async (client: Client) => {
     const context = getDirectory(client, src);
     const VERSION = Deno.env.get("CHROMATIC_VERSION") || "latest";
+    const secret = getChromaticToken(client, token);
 
-    if (!Deno.env.get("CHROMATIC_PROJECT_TOKEN") && !token) {
-      throw new Error("CHROMATIC_PROJECT_TOKEN is not set");
+    if (!secret) {
+      console.error("CHROMATIC_PROJECT_TOKEN is not set");
+      Deno.exit(1);
     }
 
     const ctr = client
@@ -41,10 +43,7 @@ export const publish = async (
       .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
       .withDirectory("/app", context, { exclude })
       .withWorkdir("/app")
-      .withEnvVariable(
-        "CHROMATIC_PROJECT_TOKEN",
-        Deno.env.get("CHROMATIC_PROJECT_TOKEN") || token!
-      )
+      .withSecretVariable("CHROMATIC_PROJECT_TOKEN", secret)
       .withExec(["yarn", "install"])
       .withExec(["bunx", `chromatic@${VERSION}`, "--exit-zero-on-changes"]);
 
