@@ -15,6 +15,14 @@ Run the following command:
 fluentci run chromatic_pipeline
 ```
 
+## Dagger Module
+
+Use as a [Dagger](https://dagger.io) Module:
+
+```bash
+dagger mod install github.com/fluent-ci-templates/chromatic-pipeline@mod
+```
+
 ## Environment Variables
 
 | Variable                | Description                                         |
