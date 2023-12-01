@@ -8,10 +8,17 @@ export enum Job {
 
 export const exclude = [".devbox", "node_modules", ".fluentci"];
 
-export const publish = async (
-  src: string | Directory | undefined = ".",
-  token?: string | Secret
-) => {
+/**
+ * @function
+ * @description Publish storybook to Chromatic
+ * @param {string | Directory} src
+ * @param {string | Secret} token
+ * @returns {string}
+ */
+export async function publish(
+  src: string | Directory,
+  token: string | Secret
+): Promise<string> {
   await connect(async (client: Client) => {
     const context = getDirectory(client, src);
     const VERSION = Deno.env.get("CHROMATIC_VERSION") || "latest";
@@ -50,16 +57,12 @@ export const publish = async (
     await ctr.stdout();
   });
   return "Done";
-};
+}
 
-export type JobExec = (src?: string) =>
-  | Promise<string>
-  | ((
-      src?: string,
-      options?: {
-        ignore: string[];
-      }
-    ) => Promise<string>);
+export type JobExec = (
+  src: string | Directory,
+  token: string | Secret
+) => Promise<string>;
 
 export const runnableJobs: Record<Job, JobExec> = {
   [Job.publish]: publish,

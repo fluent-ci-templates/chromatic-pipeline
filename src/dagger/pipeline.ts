@@ -12,7 +12,7 @@ export default async function pipeline(src = ".", args: string[] = []) {
     return;
   }
 
-  await publish();
+  await publish(src, Deno.env.get("CHROMATIC_PROJECT_TOKEN") || "");
 }
 
 async function runSpecificJobs(args: jobs.Job[]) {
@@ -21,6 +21,6 @@ async function runSpecificJobs(args: jobs.Job[]) {
     if (!job) {
       throw new Error(`Job ${name} not found`);
     }
-    await job();
+    await job(".", Deno.env.get("CHROMATIC_PROJECT_TOKEN") || "");
   }
 }
