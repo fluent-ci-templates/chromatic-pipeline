@@ -36,8 +36,11 @@ dagger mod install github.com/fluent-ci-templates/chromatic-pipeline@mod
 |---------|----------------------------------------|
 | publish | Publishes your Storybook to Chromatic. |
 
-```graphql
-publish(src: String, token: String!): String
+```typescript
+publish(
+  src: string | Directory,
+  token: string | Secret
+): Promise<string>
 ```
 
 ## Programmatic usage
@@ -45,7 +48,7 @@ publish(src: String, token: String!): String
 You can also use this pipeline programmatically:
 
 ```typescript
-import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.8.0/mod.ts";
+import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.9.0/mod.ts";
 
 await publish();
 
