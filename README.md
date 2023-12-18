@@ -50,6 +50,6 @@ You can also use this pipeline programmatically:
 ```typescript
 import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.9.0/mod.ts";
 
-await publish();
+await publish(".", Deno.env.get("CHROMATIC_PROJECT_TOKEN")!);
 
 ```
