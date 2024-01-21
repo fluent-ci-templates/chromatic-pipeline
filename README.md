@@ -48,7 +48,7 @@ publish(
 You can also use this pipeline programmatically:
 
 ```typescript
-import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.9.1/mod.ts";
+import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.9.2/mod.ts";
 
 await publish(".", Deno.env.get("CHROMATIC_PROJECT_TOKEN")!);
 
