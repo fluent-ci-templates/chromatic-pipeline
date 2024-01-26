@@ -20,9 +20,9 @@ export async function publish(
   token: string | Secret
 ): Promise<string> {
   await connect(async (client: Client) => {
-    const context = getDirectory(client, src);
+    const context = await getDirectory(client, src);
     const VERSION = Deno.env.get("CHROMATIC_VERSION") || "latest";
-    const secret = getChromaticToken(client, token);
+    const secret = await getChromaticToken(client, token);
 
     if (!secret) {
       console.error("CHROMATIC_PROJECT_TOKEN is not set");
