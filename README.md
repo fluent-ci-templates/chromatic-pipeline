@@ -5,6 +5,8 @@
 ![deno compatibility](https://shield.deno.dev/deno/^1.37)
 [![](https://img.shields.io/codecov/c/gh/fluent-ci-templates/chromatic-pipeline)](https://codecov.io/gh/fluent-ci-templates/chromatic-pipeline)
 
+[![CodeSee](https://codesee-docs.s3.amazonaws.com/badge.svg?)](https://app.codesee.io/maps/public/38254590-c689-11ee-8c91-770a2caf443d)
+
 A ready-to-use CI/CD Pipeline for your [Chromatic](https://chromatic.com/) Projects. Publishes your Storybook to Chromatic and kicks off tests if they're enabled.
 
 ## 🚀 Usage
@@ -48,7 +50,7 @@ publish(
 You can also use this pipeline programmatically:
 
 ```typescript
-import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.9.3/mod.ts";
+import { publish } from "https://pkg.fluentci.io/chromatic_pipeline@v0.9.4/mod.ts";
 
 await publish(".", Deno.env.get("CHROMATIC_PROJECT_TOKEN")!);
 
