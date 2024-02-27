@@ -1,3 +1,8 @@
+/**
+ * @module chromatic
+ * @description Deploy storybook to Chromatic
+ */
+
 import Client, { Directory, Secret } from "../../deps.ts";
 import { connect } from "../../sdk/connect.ts";
 import { getDirectory, getChromaticToken } from "./lib.ts";
