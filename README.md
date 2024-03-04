@@ -4,8 +4,8 @@
 [![deno module](https://shield.deno.dev/x/chromatic_pipeline)](https://deno.land/x/chromatic_pipeline)
 ![deno compatibility](https://shield.deno.dev/deno/^1.37)
 [![dagger-min-version](https://img.shields.io/badge/dagger-v0.10.0-blue?color=3D66FF&labelColor=000000)](https://dagger.io)
-[![](https://img.shields.io/codecov/c/gh/fluent-ci-templates/chromatic-pipeline)](https://codecov.io/gh/fluent-ci-templates/chromatic-pipeline)
 [![](https://jsr.io/badges/@fluentci/chromatic)](https://jsr.io/@fluentci/chromatic)
+[![](https://img.shields.io/codecov/c/gh/fluent-ci-templates/chromatic-pipeline)](https://codecov.io/gh/fluent-ci-templates/chromatic-pipeline)
 [![ci](https://github.com/fluent-ci-templates/chromatic-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/fluent-ci-templates/chromatic-pipeline/actions/workflows/ci.yml)
 
 A ready-to-use CI/CD Pipeline for your [Chromatic](https://chromatic.com/) Projects. Publishes your Storybook to Chromatic and kicks off tests if they're enabled.
