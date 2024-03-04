@@ -1,18 +1,15 @@
-import { uploadContext } from "../../deps.ts";
 import * as jobs from "./jobs.ts";
+import { env } from "../../deps.ts";
 
-const { publish, runnableJobs, exclude } = jobs;
+const { publish, runnableJobs } = jobs;
 
 export default async function pipeline(src = ".", args: string[] = []) {
-  if (Deno.env.has("FLUENTCI_SESSION_ID")) {
-    await uploadContext(src, exclude);
-  }
   if (args.length > 0) {
     await runSpecificJobs(args as jobs.Job[]);
     return;
   }
 
-  await publish(src, Deno.env.get("CHROMATIC_PROJECT_TOKEN") || "");
+  await publish(src, env.get("CHROMATIC_PROJECT_TOKEN") || "");
 }
 
 async function runSpecificJobs(args: jobs.Job[]) {
@@ -21,6 +18,6 @@ async function runSpecificJobs(args: jobs.Job[]) {
     if (!job) {
       throw new Error(`Job ${name} not found`);
     }
-    await job(".", Deno.env.get("CHROMATIC_PROJECT_TOKEN") || "");
+    await job(".", env.get("CHROMATIC_PROJECT_TOKEN") || "");
   }
 }

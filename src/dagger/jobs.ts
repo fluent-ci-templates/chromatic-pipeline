@@ -3,8 +3,7 @@
  * @description Deploy storybook to Chromatic
  */
 
-import Client, { Directory, Secret } from "../../deps.ts";
-import { connect } from "../../sdk/connect.ts";
+import { dag, env, exit, Directory, Secret } from "../../deps.ts";
 import { getDirectory, getChromaticToken } from "./lib.ts";
 
 export enum Job {
@@ -14,6 +13,8 @@ export enum Job {
 export const exclude = [".devbox", "node_modules", ".fluentci"];
 
 /**
+ * Publish storybook to Chromatic
+ *
  * @function
  * @description Publish storybook to Chromatic
  * @param {string | Directory} src
@@ -24,44 +25,39 @@ export async function publish(
   src: string | Directory,
   token: string | Secret
 ): Promise<string> {
-  await connect(async (client: Client) => {
-    const context = await getDirectory(client, src);
-    const VERSION = Deno.env.get("CHROMATIC_VERSION") || "latest";
-    const secret = await getChromaticToken(client, token);
+  const context = await getDirectory(src);
+  const VERSION = env.get("CHROMATIC_VERSION") || "latest";
+  const secret = await getChromaticToken(token);
 
-    if (!secret) {
-      console.error("CHROMATIC_PROJECT_TOKEN is not set");
-      Deno.exit(1);
-    }
+  if (!secret) {
+    console.error("CHROMATIC_PROJECT_TOKEN is not set");
+    exit(1);
+    return "";
+  }
 
-    const ctr = client
-      .pipeline(Job.publish)
-      .container()
-      .from("ghcr.io/fluentci-io/pkgx:latest")
-      .withExec(["apt-get", "update"])
-      .withExec(["apt-get", "install", "-y", "build-essential"])
-      .withExec([
-        "pkgx",
-        "install",
-        "node@18",
-        "bun",
-        "git",
-        "classic.yarnpkg.com",
-      ])
-      .withMountedCache(
-        "/root/.bun/install/cache",
-        client.cacheVolume("bun-cache")
-      )
-      .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
-      .withDirectory("/app", context, { exclude })
-      .withWorkdir("/app")
-      .withSecretVariable("CHROMATIC_PROJECT_TOKEN", secret)
-      .withExec(["yarn", "install"])
-      .withExec(["bunx", `chromatic@${VERSION}`, "--exit-zero-on-changes"]);
+  const ctr = dag
+    .pipeline(Job.publish)
+    .container()
+    .from("ghcr.io/fluentci-io/pkgx:latest")
+    .withExec(["apt-get", "update"])
+    .withExec(["apt-get", "install", "-y", "build-essential"])
+    .withExec([
+      "pkgx",
+      "install",
+      "node@18",
+      "bun",
+      "git",
+      "classic.yarnpkg.com",
+    ])
+    .withMountedCache("/root/.bun/install/cache", dag.cacheVolume("bun-cache"))
+    .withMountedCache("/app/node_modules", dag.cacheVolume("node_modules"))
+    .withDirectory("/app", context, { exclude })
+    .withWorkdir("/app")
+    .withSecretVariable("CHROMATIC_PROJECT_TOKEN", secret)
+    .withExec(["yarn", "install"])
+    .withExec(["bunx", `chromatic@${VERSION}`, "--exit-zero-on-changes"]);
 
-    await ctr.stdout();
-  });
-  return "Done";
+  return ctr.stdout();
 }
 
 export type JobExec = (
