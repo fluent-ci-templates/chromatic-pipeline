@@ -54,7 +54,7 @@ export async function publish(
     .withDirectory("/app", context, { exclude })
     .withWorkdir("/app")
     .withSecretVariable("CHROMATIC_PROJECT_TOKEN", secret)
-    .withExec(["yarn", "install"])
+    .withExec(["bun", "install"])
     .withExec(["bunx", `chromatic@${VERSION}`, "--exit-zero-on-changes"]);
 
   return ctr.stdout();
