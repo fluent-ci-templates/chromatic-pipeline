@@ -7,17 +7,17 @@ pub fn publish() -> FnResult<String> {
         .pkgx()?
         .with_exec(vec![
             "pkgx",
-            "+node@18",
+            "+nodejs.org@18",
             "+git",
-            "+classic.yarnpkg.com",
-            "yarn",
+            "+bun@1.1.3",
+            "bun",
             "install",
         ])?
         .with_exec(vec![
             "pkgx",
-            "+node@18",
+            "+nodejs.org@18",
             "+git",
-            "+bun",
+            "+bun@1.1.3",
             "bunx",
             "chromatic",
             "--exit-zero-on-changes",
