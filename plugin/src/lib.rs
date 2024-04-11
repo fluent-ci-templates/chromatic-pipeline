@@ -5,9 +5,23 @@ use fluentci_pdk::dag;
 pub fn publish() -> FnResult<String> {
     let stdout = dag()
         .pkgx()?
-        .with_packages(vec!["node@18", "bun", "git", "classic.yarnpkg.com"])?
-        .with_exec(vec!["yarn", "install"])?
-        .with_exec(vec!["bunx", "chromatic", "--exit-zero-on-changes"])?
+        .with_exec(vec![
+            "pkgx",
+            "+node@18",
+            "+git",
+            "+classic.yarnpkg.com",
+            "yarn",
+            "install",
+        ])?
+        .with_exec(vec![
+            "pkgx",
+            "+node@18",
+            "+git",
+            "+bun",
+            "bunx",
+            "chromatic",
+            "--exit-zero-on-changes",
+        ])?
         .stdout()?;
     Ok(stdout)
 }
