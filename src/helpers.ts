@@ -1,8 +1,8 @@
-import { dag } from "../../sdk/client.gen.ts";
-import { Directory, DirectoryID, Secret, SecretID } from "../../deps.ts";
+import { dag } from "../sdk/client.gen.ts";
+import { Directory, DirectoryID, Secret, SecretID } from "../deps.ts";
 
 export const getDirectory = async (
-  src: string | Directory | undefined = "."
+  src: string | Directory | undefined = ".",
 ) => {
   if (src instanceof Directory) {
     return src;
@@ -27,7 +27,7 @@ export const getChromaticToken = async (token?: string | Secret) => {
   if (Deno.env.get("CHROMATIC_PROJECT_TOKEN")) {
     return dag.setSecret(
       "CHROMATIC_PROJECT_TOKEN",
-      Deno.env.get("CHROMATIC_PROJECT_TOKEN")!
+      Deno.env.get("CHROMATIC_PROJECT_TOKEN")!,
     );
   }
   if (token && typeof token === "string") {

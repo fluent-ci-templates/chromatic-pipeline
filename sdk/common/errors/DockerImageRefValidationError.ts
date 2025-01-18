@@ -1,8 +1,8 @@
-import { DaggerSDKError, DaggerSDKErrorOptions } from "./DaggerSDKError.ts"
-import { ERROR_CODES, ERROR_NAMES } from "./errors-codes.ts"
+import { DaggerSDKError, DaggerSDKErrorOptions } from "./DaggerSDKError.ts";
+import { ERROR_CODES, ERROR_NAMES } from "./errors-codes.ts";
 
 interface DockerImageRefValidationErrorOptions extends DaggerSDKErrorOptions {
-  ref: string
+  ref: string;
 }
 
 /**
@@ -10,19 +10,19 @@ interface DockerImageRefValidationErrorOptions extends DaggerSDKErrorOptions {
  *  DockerImage constructor.
  */
 export class DockerImageRefValidationError extends DaggerSDKError {
-  name = ERROR_NAMES.DockerImageRefValidationError
-  code = ERROR_CODES.DockerImageRefValidationError
+  name = ERROR_NAMES.DockerImageRefValidationError;
+  code = ERROR_CODES.DockerImageRefValidationError;
 
   /**
    *  The docker image reference, which caused the error.
    */
-  ref: string
+  ref: string;
 
   /**
    *  @hidden
    */
   constructor(message: string, options: DockerImageRefValidationErrorOptions) {
-    super(message, options)
-    this.ref = options?.ref
+    super(message, options);
+    this.ref = options?.ref;
   }
 }

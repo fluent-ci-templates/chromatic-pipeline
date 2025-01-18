@@ -48,16 +48,16 @@ export const ERROR_CODES = {
    * (@link ExecError}
    */
   ExecError: "D109",
-} as const
+} as const;
 
-type ErrorCodesType = typeof ERROR_CODES
-export type ErrorNames = keyof ErrorCodesType
-export type ErrorCodes = ErrorCodesType[ErrorNames]
+type ErrorCodesType = typeof ERROR_CODES;
+export type ErrorNames = keyof ErrorCodesType;
+export type ErrorCodes = ErrorCodesType[ErrorNames];
 
-type ErrorNamesMap = { readonly [Key in ErrorNames]: Key }
+type ErrorNamesMap = { readonly [Key in ErrorNames]: Key };
 export const ERROR_NAMES: ErrorNamesMap = (
   Object.keys(ERROR_CODES) as Array<ErrorNames>
 ).reduce<ErrorNamesMap>(
   (obj, item) => ({ ...obj, [item]: item }),
-  {} as ErrorNamesMap
-)
+  {} as ErrorNamesMap,
+);

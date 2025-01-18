@@ -8,7 +8,9 @@
 [![](https://img.shields.io/codecov/c/gh/fluent-ci-templates/chromatic-pipeline)](https://codecov.io/gh/fluent-ci-templates/chromatic-pipeline)
 [![ci](https://github.com/fluent-ci-templates/chromatic-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/fluent-ci-templates/chromatic-pipeline/actions/workflows/ci.yml)
 
-A ready-to-use CI/CD Pipeline for your [Chromatic](https://chromatic.com/) Projects. Publishes your Storybook to Chromatic and kicks off tests if they're enabled.
+A ready-to-use CI/CD Pipeline for your [Chromatic](https://chromatic.com/)
+Projects. Publishes your Storybook to Chromatic and kicks off tests if they're
+enabled.
 
 ## 🚀 Usage
 
@@ -35,14 +37,14 @@ dagger call publish --src . --token CHROMATIC_PROJECT_TOKEN
 ## 🛠️ Environment Variables
 
 | Variable                | Description                                         |
-|-------------------------|-----------------------------------------------------|
+| ----------------------- | --------------------------------------------------- |
 | CHROMATIC_PROJECT_TOKEN | Your Chromatic Project Token.                       |
 | CHROMATIC_VERSION       | The version of Chromatic CLI. Defaults to `latest`. |
 
 ## ✨ Jobs
 
 | Job     | Description                            |
-|---------|----------------------------------------|
+| ------- | -------------------------------------- |
 | publish | Publishes your Storybook to Chromatic. |
 
 ```typescript
@@ -60,5 +62,4 @@ You can also use this pipeline programmatically:
 import { publish } from "jsr:@fluentci/chromatic";
 
 await publish(".", Deno.env.get("CHROMATIC_PROJECT_TOKEN")!);
-
 ```

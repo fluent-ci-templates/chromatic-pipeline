@@ -1048,7 +1048,7 @@ export class CacheVolume extends BaseClient {
    */
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
-    _id?: CacheVolumeID
+    _id?: CacheVolumeID,
   ) {
     super(parent);
 
@@ -1070,7 +1070,7 @@ export class CacheVolume extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1110,7 +1110,7 @@ export class Container extends BaseClient {
     _stdout?: string,
     _sync?: ContainerID,
     _user?: string,
-    _workdir?: string
+    _workdir?: string,
   ) {
     super(parent);
 
@@ -1143,7 +1143,7 @@ export class Container extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1232,7 +1232,7 @@ export class Container extends BaseClient {
           operation: "defaultArgs",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1268,7 +1268,7 @@ export class Container extends BaseClient {
           operation: "entrypoint",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1291,7 +1291,7 @@ export class Container extends BaseClient {
           args: { name },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1315,7 +1315,7 @@ export class Container extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -1330,8 +1330,8 @@ export class Container extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -1396,7 +1396,7 @@ export class Container extends BaseClient {
    */
   export = async (
     path: string,
-    opts?: ContainerExportOpts
+    opts?: ContainerExportOpts,
   ): Promise<boolean> => {
     if (this._export) {
       return this._export;
@@ -1415,7 +1415,7 @@ export class Container extends BaseClient {
           args: { path, ...opts, __metadata: metadata },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1441,7 +1441,7 @@ export class Container extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -1456,8 +1456,8 @@ export class Container extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -1514,7 +1514,7 @@ export class Container extends BaseClient {
           operation: "imageRef",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1555,7 +1555,7 @@ export class Container extends BaseClient {
           args: { name },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1579,7 +1579,7 @@ export class Container extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -1594,8 +1594,8 @@ export class Container extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -1610,7 +1610,7 @@ export class Container extends BaseClient {
           operation: "mounts",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1650,7 +1650,7 @@ export class Container extends BaseClient {
           operation: "platform",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1677,7 +1677,7 @@ export class Container extends BaseClient {
    */
   publish = async (
     address: string,
-    opts?: ContainerPublishOpts
+    opts?: ContainerPublishOpts,
   ): Promise<string> => {
     if (this._publish) {
       return this._publish;
@@ -1696,7 +1696,7 @@ export class Container extends BaseClient {
           args: { address, ...opts, __metadata: metadata },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1734,7 +1734,7 @@ export class Container extends BaseClient {
           operation: "stderr",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1757,7 +1757,7 @@ export class Container extends BaseClient {
           operation: "stdout",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1776,7 +1776,7 @@ export class Container extends BaseClient {
           operation: "sync",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return this;
@@ -1814,7 +1814,7 @@ export class Container extends BaseClient {
           operation: "user",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -1869,7 +1869,7 @@ export class Container extends BaseClient {
   withDirectory = (
     path: string,
     directory: Directory,
-    opts?: ContainerWithDirectoryOpts
+    opts?: ContainerWithDirectoryOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -1890,7 +1890,7 @@ export class Container extends BaseClient {
    */
   withEntrypoint = (
     args: string[],
-    opts?: ContainerWithEntrypointOpts
+    opts?: ContainerWithEntrypointOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -1913,7 +1913,7 @@ export class Container extends BaseClient {
   withEnvVariable = (
     name: string,
     value: string,
-    opts?: ContainerWithEnvVariableOpts
+    opts?: ContainerWithEnvVariableOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -1969,7 +1969,7 @@ export class Container extends BaseClient {
    */
   withExposedPort = (
     port: number,
-    opts?: ContainerWithExposedPortOpts
+    opts?: ContainerWithExposedPortOpts,
   ): Container => {
     const metadata: Metadata = {
       protocol: { is_enum: true },
@@ -2001,7 +2001,7 @@ export class Container extends BaseClient {
   withFile = (
     path: string,
     source: File,
-    opts?: ContainerWithFileOpts
+    opts?: ContainerWithFileOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -2029,7 +2029,7 @@ export class Container extends BaseClient {
   withFiles = (
     path: string,
     sources: File[],
-    opts?: ContainerWithFilesOpts
+    opts?: ContainerWithFilesOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -2093,7 +2093,7 @@ export class Container extends BaseClient {
   withMountedCache = (
     path: string,
     cache: CacheVolume,
-    opts?: ContainerWithMountedCacheOpts
+    opts?: ContainerWithMountedCacheOpts,
   ): Container => {
     const metadata: Metadata = {
       sharing: { is_enum: true },
@@ -2124,7 +2124,7 @@ export class Container extends BaseClient {
   withMountedDirectory = (
     path: string,
     source: Directory,
-    opts?: ContainerWithMountedDirectoryOpts
+    opts?: ContainerWithMountedDirectoryOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -2151,7 +2151,7 @@ export class Container extends BaseClient {
   withMountedFile = (
     path: string,
     source: File,
-    opts?: ContainerWithMountedFileOpts
+    opts?: ContainerWithMountedFileOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -2181,7 +2181,7 @@ export class Container extends BaseClient {
   withMountedSecret = (
     path: string,
     source: Secret,
-    opts?: ContainerWithMountedSecretOpts
+    opts?: ContainerWithMountedSecretOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -2247,7 +2247,7 @@ export class Container extends BaseClient {
   withRegistryAuth = (
     address: string,
     username: string,
-    secret: Secret
+    secret: Secret,
   ): Container => {
     return new Container({
       queryTree: [
@@ -2333,7 +2333,7 @@ export class Container extends BaseClient {
   withUnixSocket = (
     path: string,
     source: Socket,
-    opts?: ContainerWithUnixSocketOpts
+    opts?: ContainerWithUnixSocketOpts,
   ): Container => {
     return new Container({
       queryTree: [
@@ -2437,7 +2437,7 @@ export class Container extends BaseClient {
    */
   withoutExposedPort = (
     port: number,
-    opts?: ContainerWithoutExposedPortOpts
+    opts?: ContainerWithoutExposedPortOpts,
   ): Container => {
     const metadata: Metadata = {
       protocol: { is_enum: true },
@@ -2591,7 +2591,7 @@ export class Container extends BaseClient {
           operation: "workdir",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -2620,7 +2620,7 @@ export class CurrentModule extends BaseClient {
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: CurrentModuleID,
-    _name?: string
+    _name?: string,
   ) {
     super(parent);
 
@@ -2643,7 +2643,7 @@ export class CurrentModule extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -2664,7 +2664,7 @@ export class CurrentModule extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -2737,7 +2737,7 @@ export class Directory extends BaseClient {
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: DirectoryID,
     _export?: boolean,
-    _sync?: DirectoryID
+    _sync?: DirectoryID,
   ) {
     super(parent);
 
@@ -2761,7 +2761,7 @@ export class Directory extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -2858,7 +2858,7 @@ export class Directory extends BaseClient {
           args: { ...opts },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -2881,7 +2881,7 @@ export class Directory extends BaseClient {
           args: { path },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -2917,7 +2917,7 @@ export class Directory extends BaseClient {
           args: { pattern },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -2953,7 +2953,7 @@ export class Directory extends BaseClient {
           operation: "sync",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return this;
@@ -2969,7 +2969,7 @@ export class Directory extends BaseClient {
   withDirectory = (
     path: string,
     directory: Directory,
-    opts?: DirectoryWithDirectoryOpts
+    opts?: DirectoryWithDirectoryOpts,
   ): Directory => {
     return new Directory({
       queryTree: [
@@ -2992,7 +2992,7 @@ export class Directory extends BaseClient {
   withFile = (
     path: string,
     source: File,
-    opts?: DirectoryWithFileOpts
+    opts?: DirectoryWithFileOpts,
   ): Directory => {
     return new Directory({
       queryTree: [
@@ -3015,7 +3015,7 @@ export class Directory extends BaseClient {
   withFiles = (
     path: string,
     sources: File[],
-    opts?: DirectoryWithFilesOpts
+    opts?: DirectoryWithFilesOpts,
   ): Directory => {
     return new Directory({
       queryTree: [
@@ -3036,7 +3036,7 @@ export class Directory extends BaseClient {
    */
   withNewDirectory = (
     path: string,
-    opts?: DirectoryWithNewDirectoryOpts
+    opts?: DirectoryWithNewDirectoryOpts,
   ): Directory => {
     return new Directory({
       queryTree: [
@@ -3059,7 +3059,7 @@ export class Directory extends BaseClient {
   withNewFile = (
     path: string,
     contents: string,
-    opts?: DirectoryWithNewFileOpts
+    opts?: DirectoryWithNewFileOpts,
   ): Directory => {
     return new Directory({
       queryTree: [
@@ -3151,7 +3151,7 @@ export class EnvVariable extends BaseClient {
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: EnvVariableID,
     _name?: string,
-    _value?: string
+    _value?: string,
   ) {
     super(parent);
 
@@ -3175,7 +3175,7 @@ export class EnvVariable extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3196,7 +3196,7 @@ export class EnvVariable extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3217,7 +3217,7 @@ export class EnvVariable extends BaseClient {
           operation: "value",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3241,7 +3241,7 @@ export class FieldTypeDef extends BaseClient {
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: FieldTypeDefID,
     _description?: string,
-    _name?: string
+    _name?: string,
   ) {
     super(parent);
 
@@ -3265,7 +3265,7 @@ export class FieldTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3286,7 +3286,7 @@ export class FieldTypeDef extends BaseClient {
           operation: "description",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3307,7 +3307,7 @@ export class FieldTypeDef extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3350,7 +3350,7 @@ export class File extends BaseClient {
     _export?: boolean,
     _name?: string,
     _size?: number,
-    _sync?: FileID
+    _sync?: FileID,
   ) {
     super(parent);
 
@@ -3377,7 +3377,7 @@ export class File extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3398,7 +3398,7 @@ export class File extends BaseClient {
           operation: "contents",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3422,7 +3422,7 @@ export class File extends BaseClient {
           args: { path, ...opts },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3443,7 +3443,7 @@ export class File extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3464,7 +3464,7 @@ export class File extends BaseClient {
           operation: "size",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3481,7 +3481,7 @@ export class File extends BaseClient {
           operation: "sync",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return this;
@@ -3533,7 +3533,7 @@ export class Function_ extends BaseClient {
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: FunctionID,
     _description?: string,
-    _name?: string
+    _name?: string,
   ) {
     super(parent);
 
@@ -3557,7 +3557,7 @@ export class Function_ extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3581,7 +3581,7 @@ export class Function_ extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -3596,8 +3596,8 @@ export class Function_ extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -3616,7 +3616,7 @@ export class Function_ extends BaseClient {
           operation: "description",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3637,7 +3637,7 @@ export class Function_ extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3668,7 +3668,7 @@ export class Function_ extends BaseClient {
   withArg = (
     name: string,
     typeDef: TypeDef,
-    opts?: FunctionWithArgOpts
+    opts?: FunctionWithArgOpts,
   ): Function_ => {
     return new Function_({
       queryTree: [
@@ -3728,7 +3728,7 @@ export class FunctionArg extends BaseClient {
     _id?: FunctionArgID,
     _defaultValue?: JSON,
     _description?: string,
-    _name?: string
+    _name?: string,
   ) {
     super(parent);
 
@@ -3753,7 +3753,7 @@ export class FunctionArg extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3774,7 +3774,7 @@ export class FunctionArg extends BaseClient {
           operation: "defaultValue",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3795,7 +3795,7 @@ export class FunctionArg extends BaseClient {
           operation: "description",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3816,7 +3816,7 @@ export class FunctionArg extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3857,7 +3857,7 @@ export class FunctionCall extends BaseClient {
     _name?: string,
     _parent?: JSON,
     _parentName?: string,
-    _returnValue?: Void
+    _returnValue?: Void,
   ) {
     super(parent);
 
@@ -3883,7 +3883,7 @@ export class FunctionCall extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3907,7 +3907,7 @@ export class FunctionCall extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -3922,8 +3922,8 @@ export class FunctionCall extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -3942,7 +3942,7 @@ export class FunctionCall extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3963,7 +3963,7 @@ export class FunctionCall extends BaseClient {
           operation: "parent",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -3984,7 +3984,7 @@ export class FunctionCall extends BaseClient {
           operation: "parentName",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4007,7 +4007,7 @@ export class FunctionCall extends BaseClient {
           args: { value },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4029,7 +4029,7 @@ export class FunctionCallArgValue extends BaseClient {
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: FunctionCallArgValueID,
     _name?: string,
-    _value?: JSON
+    _value?: JSON,
   ) {
     super(parent);
 
@@ -4053,7 +4053,7 @@ export class FunctionCallArgValue extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4074,7 +4074,7 @@ export class FunctionCallArgValue extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4095,7 +4095,7 @@ export class FunctionCallArgValue extends BaseClient {
           operation: "value",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4113,7 +4113,7 @@ export class GeneratedCode extends BaseClient {
    */
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
-    _id?: GeneratedCodeID
+    _id?: GeneratedCodeID,
   ) {
     super(parent);
 
@@ -4135,7 +4135,7 @@ export class GeneratedCode extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4167,7 +4167,7 @@ export class GeneratedCode extends BaseClient {
           operation: "vcsGeneratedPaths",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4184,7 +4184,7 @@ export class GeneratedCode extends BaseClient {
           operation: "vcsIgnoredPaths",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4253,7 +4253,7 @@ export class GitModuleSource extends BaseClient {
     _commit?: string,
     _htmlURL?: string,
     _rootSubpath?: string,
-    _version?: string
+    _version?: string,
   ) {
     super(parent);
 
@@ -4280,7 +4280,7 @@ export class GitModuleSource extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4301,7 +4301,7 @@ export class GitModuleSource extends BaseClient {
           operation: "cloneURL",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4322,7 +4322,7 @@ export class GitModuleSource extends BaseClient {
           operation: "commit",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4358,7 +4358,7 @@ export class GitModuleSource extends BaseClient {
           operation: "htmlURL",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4379,7 +4379,7 @@ export class GitModuleSource extends BaseClient {
           operation: "rootSubpath",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4400,7 +4400,7 @@ export class GitModuleSource extends BaseClient {
           operation: "version",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4420,7 +4420,7 @@ export class GitRef extends BaseClient {
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: GitRefID,
-    _commit?: string
+    _commit?: string,
   ) {
     super(parent);
 
@@ -4443,7 +4443,7 @@ export class GitRef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4464,7 +4464,7 @@ export class GitRef extends BaseClient {
           operation: "commit",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4500,7 +4500,7 @@ export class GitRepository extends BaseClient {
    */
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
-    _id?: GitRepositoryID
+    _id?: GitRepositoryID,
   ) {
     super(parent);
 
@@ -4522,7 +4522,7 @@ export class GitRepository extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4608,7 +4608,7 @@ export class Host extends BaseClient {
    */
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
-    _id?: HostID
+    _id?: HostID,
   ) {
     super(parent);
 
@@ -4630,7 +4630,7 @@ export class Host extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4775,7 +4775,7 @@ export class InputTypeDef extends BaseClient {
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: InputTypeDefID,
-    _name?: string
+    _name?: string,
   ) {
     super(parent);
 
@@ -4798,7 +4798,7 @@ export class InputTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4822,7 +4822,7 @@ export class InputTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -4837,8 +4837,8 @@ export class InputTypeDef extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -4857,7 +4857,7 @@ export class InputTypeDef extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4881,7 +4881,7 @@ export class InterfaceTypeDef extends BaseClient {
     _id?: InterfaceTypeDefID,
     _description?: string,
     _name?: string,
-    _sourceModuleName?: string
+    _sourceModuleName?: string,
   ) {
     super(parent);
 
@@ -4906,7 +4906,7 @@ export class InterfaceTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4927,7 +4927,7 @@ export class InterfaceTypeDef extends BaseClient {
           operation: "description",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -4951,7 +4951,7 @@ export class InterfaceTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -4966,8 +4966,8 @@ export class InterfaceTypeDef extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -4986,7 +4986,7 @@ export class InterfaceTypeDef extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5007,7 +5007,7 @@ export class InterfaceTypeDef extends BaseClient {
           operation: "sourceModuleName",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5029,7 +5029,7 @@ export class Label extends BaseClient {
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: LabelID,
     _name?: string,
-    _value?: string
+    _value?: string,
   ) {
     super(parent);
 
@@ -5053,7 +5053,7 @@ export class Label extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5074,7 +5074,7 @@ export class Label extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5095,7 +5095,7 @@ export class Label extends BaseClient {
           operation: "value",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5113,7 +5113,7 @@ export class ListTypeDef extends BaseClient {
    */
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
-    _id?: ListTypeDefID
+    _id?: ListTypeDefID,
   ) {
     super(parent);
 
@@ -5135,7 +5135,7 @@ export class ListTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5170,7 +5170,7 @@ export class LocalModuleSource extends BaseClient {
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: LocalModuleSourceID,
-    _rootSubpath?: string
+    _rootSubpath?: string,
   ) {
     super(parent);
 
@@ -5193,7 +5193,7 @@ export class LocalModuleSource extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5229,7 +5229,7 @@ export class LocalModuleSource extends BaseClient {
           operation: "rootSubpath",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5255,7 +5255,7 @@ export class Module_ extends BaseClient {
     _description?: string,
     _name?: string,
     _sdk?: string,
-    _serve?: Void
+    _serve?: Void,
   ) {
     super(parent);
 
@@ -5281,7 +5281,7 @@ export class Module_ extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5305,7 +5305,7 @@ export class Module_ extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -5320,8 +5320,8 @@ export class Module_ extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -5343,7 +5343,7 @@ export class Module_ extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -5358,8 +5358,8 @@ export class Module_ extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -5378,7 +5378,7 @@ export class Module_ extends BaseClient {
           operation: "description",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5447,7 +5447,7 @@ export class Module_ extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -5462,8 +5462,8 @@ export class Module_ extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -5482,7 +5482,7 @@ export class Module_ extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5506,7 +5506,7 @@ export class Module_ extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -5521,8 +5521,8 @@ export class Module_ extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -5556,7 +5556,7 @@ export class Module_ extends BaseClient {
           operation: "sdk",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5579,7 +5579,7 @@ export class Module_ extends BaseClient {
           operation: "serve",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5689,7 +5689,7 @@ export class ModuleDependency extends BaseClient {
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: ModuleDependencyID,
-    _name?: string
+    _name?: string,
   ) {
     super(parent);
 
@@ -5712,7 +5712,7 @@ export class ModuleDependency extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5733,7 +5733,7 @@ export class ModuleDependency extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5782,7 +5782,7 @@ export class ModuleSource extends BaseClient {
     _moduleOriginalName?: string,
     _resolveContextPathFromCaller?: string,
     _sourceRootSubpath?: string,
-    _sourceSubpath?: string
+    _sourceSubpath?: string,
   ) {
     super(parent);
 
@@ -5812,7 +5812,7 @@ export class ModuleSource extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5878,7 +5878,7 @@ export class ModuleSource extends BaseClient {
           operation: "asString",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5899,7 +5899,7 @@ export class ModuleSource extends BaseClient {
           operation: "configExists",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -5938,7 +5938,7 @@ export class ModuleSource extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -5953,8 +5953,8 @@ export class ModuleSource extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -5990,7 +5990,7 @@ export class ModuleSource extends BaseClient {
           operation: "kind",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6011,7 +6011,7 @@ export class ModuleSource extends BaseClient {
           operation: "moduleName",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6032,7 +6032,7 @@ export class ModuleSource extends BaseClient {
           operation: "moduleOriginalName",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6053,7 +6053,7 @@ export class ModuleSource extends BaseClient {
           operation: "resolveContextPathFromCaller",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6106,7 +6106,7 @@ export class ModuleSource extends BaseClient {
           operation: "sourceRootSubpath",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6127,7 +6127,7 @@ export class ModuleSource extends BaseClient {
           operation: "sourceSubpath",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6245,7 +6245,7 @@ export class ObjectTypeDef extends BaseClient {
     _id?: ObjectTypeDefID,
     _description?: string,
     _name?: string,
-    _sourceModuleName?: string
+    _sourceModuleName?: string,
   ) {
     super(parent);
 
@@ -6270,7 +6270,7 @@ export class ObjectTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6306,7 +6306,7 @@ export class ObjectTypeDef extends BaseClient {
           operation: "description",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6330,7 +6330,7 @@ export class ObjectTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -6345,8 +6345,8 @@ export class ObjectTypeDef extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -6368,7 +6368,7 @@ export class ObjectTypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -6383,8 +6383,8 @@ export class ObjectTypeDef extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -6403,7 +6403,7 @@ export class ObjectTypeDef extends BaseClient {
           operation: "name",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6424,7 +6424,7 @@ export class ObjectTypeDef extends BaseClient {
           operation: "sourceModuleName",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6450,7 +6450,7 @@ export class Port extends BaseClient {
     _description?: string,
     _experimentalSkipHealthcheck?: boolean,
     _port?: number,
-    _protocol?: NetworkProtocol
+    _protocol?: NetworkProtocol,
   ) {
     super(parent);
 
@@ -6476,7 +6476,7 @@ export class Port extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6497,7 +6497,7 @@ export class Port extends BaseClient {
           operation: "description",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6518,7 +6518,7 @@ export class Port extends BaseClient {
           operation: "experimentalSkipHealthcheck",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6539,7 +6539,7 @@ export class Port extends BaseClient {
           operation: "port",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6560,7 +6560,7 @@ export class Port extends BaseClient {
           operation: "protocol",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6580,7 +6580,7 @@ export class Client extends BaseClient {
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _checkVersionCompatibility?: boolean,
-    _defaultPlatform?: Platform
+    _defaultPlatform?: Platform,
   ) {
     super(parent);
 
@@ -6599,7 +6599,7 @@ export class Client extends BaseClient {
     digest: string,
     size: number,
     mediaType: string,
-    uncompressed: string
+    uncompressed: string,
   ): Directory => {
     return new Directory({
       queryTree: [
@@ -6660,7 +6660,7 @@ export class Client extends BaseClient {
           args: { version },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -6736,7 +6736,7 @@ export class Client extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -6751,8 +6751,8 @@ export class Client extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -6767,7 +6767,7 @@ export class Client extends BaseClient {
           operation: "defaultPlatform",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7030,7 +7030,7 @@ export class Client extends BaseClient {
    * Load a FunctionCallArgValue from its ID.
    */
   loadFunctionCallArgValueFromID = (
-    id: FunctionCallArgValueID
+    id: FunctionCallArgValueID,
   ): FunctionCallArgValue => {
     return new FunctionCallArgValue({
       queryTree: [
@@ -7224,7 +7224,7 @@ export class Client extends BaseClient {
    * Load a LocalModuleSource from its ID.
    */
   loadLocalModuleSourceFromID = (
-    id: LocalModuleSourceID
+    id: LocalModuleSourceID,
   ): LocalModuleSource => {
     return new LocalModuleSource({
       queryTree: [
@@ -7420,7 +7420,7 @@ export class Client extends BaseClient {
    */
   moduleDependency = (
     source: ModuleSource,
-    opts?: ClientModuleDependencyOpts
+    opts?: ClientModuleDependencyOpts,
   ): ModuleDependency => {
     return new ModuleDependency({
       queryTree: [
@@ -7441,7 +7441,7 @@ export class Client extends BaseClient {
    */
   moduleSource = (
     refString: string,
-    opts?: ClientModuleSourceOpts
+    opts?: ClientModuleSourceOpts,
   ): ModuleSource => {
     return new ModuleSource({
       queryTree: [
@@ -7565,7 +7565,7 @@ export class Secret extends BaseClient {
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: SecretID,
-    _plaintext?: string
+    _plaintext?: string,
   ) {
     super(parent);
 
@@ -7588,7 +7588,7 @@ export class Secret extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7609,7 +7609,7 @@ export class Secret extends BaseClient {
           operation: "plaintext",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7637,7 +7637,7 @@ export class Service extends BaseClient {
     _hostname?: string,
     _start?: ServiceID,
     _stop?: ServiceID,
-    _up?: Void
+    _up?: Void,
   ) {
     super(parent);
 
@@ -7664,7 +7664,7 @@ export class Service extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7692,7 +7692,7 @@ export class Service extends BaseClient {
           args: { ...opts },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7713,7 +7713,7 @@ export class Service extends BaseClient {
           operation: "hostname",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7737,7 +7737,7 @@ export class Service extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response.map(
@@ -7752,8 +7752,8 @@ export class Service extends BaseClient {
             ],
             ctx: this._ctx,
           },
-          r.id
-        )
+          r.id,
+        ),
     );
   };
 
@@ -7770,7 +7770,7 @@ export class Service extends BaseClient {
           operation: "start",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return this;
@@ -7789,7 +7789,7 @@ export class Service extends BaseClient {
           args: { ...opts },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return this;
@@ -7815,7 +7815,7 @@ export class Service extends BaseClient {
           args: { ...opts },
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7833,7 +7833,7 @@ export class Socket extends BaseClient {
    */
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
-    _id?: SocketID
+    _id?: SocketID,
   ) {
     super(parent);
 
@@ -7855,7 +7855,7 @@ export class Socket extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7875,7 +7875,7 @@ export class Terminal extends BaseClient {
   constructor(
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: TerminalID,
-    _websocketEndpoint?: string
+    _websocketEndpoint?: string,
   ) {
     super(parent);
 
@@ -7898,7 +7898,7 @@ export class Terminal extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7919,7 +7919,7 @@ export class Terminal extends BaseClient {
           operation: "websocketEndpoint",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -7941,7 +7941,7 @@ export class TypeDef extends BaseClient {
     parent?: { queryTree?: QueryTree[]; ctx: Context },
     _id?: TypeDefID,
     _kind?: TypeDefKind,
-    _optional?: boolean
+    _optional?: boolean,
   ) {
     super(parent);
 
@@ -7965,7 +7965,7 @@ export class TypeDef extends BaseClient {
           operation: "id",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -8046,7 +8046,7 @@ export class TypeDef extends BaseClient {
           operation: "kind",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -8067,7 +8067,7 @@ export class TypeDef extends BaseClient {
           operation: "optional",
         },
       ],
-      await this._ctx.connection()
+      await this._ctx.connection(),
     );
 
     return response;
@@ -8100,7 +8100,7 @@ export class TypeDef extends BaseClient {
   withField = (
     name: string,
     typeDef: TypeDef,
-    opts?: TypeDefWithFieldOpts
+    opts?: TypeDefWithFieldOpts,
   ): TypeDef => {
     return new TypeDef({
       queryTree: [

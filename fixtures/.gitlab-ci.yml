@@ -25,4 +25,3 @@ publish:
   extends: .dagger
   script:
     - dagger run fluentci chromatic_pipeline
-

@@ -1,7 +1,7 @@
 export { assertEquals } from "jsr:@std/testing@0.218.2/asserts";
 
 export type { DirectoryID, SecretID } from "./sdk/client.gen.ts";
-export { Directory, Secret, dag } from "./sdk/client.gen.ts";
+export { dag, Directory, Secret } from "./sdk/client.gen.ts";
 export { brightGreen } from "jsr:@std/fmt@0.218.2/colors";
 export { stringifyTree } from "npm:stringify-tree@1.1.1";
 import { gql } from "npm:graphql-request@6.1.0";
@@ -12,7 +12,7 @@ export { parse } from "jsr:@std/flags@0.218.2";
 import * as _ from "npm:lodash@4.17.21";
 const snakeCase = _.default.snakeCase;
 const camelCase = _.default.camelCase;
-export { snakeCase, camelCase };
+export { camelCase, snakeCase };
 
 import * as env from "jsr:@tsirysndr/env-js@0.1.2";
 export { env };
@@ -21,17 +21,17 @@ export { exit } from "jsr:@tsirysndr/exit-js@0.1.0";
 export { ClientError, GraphQLClient } from "npm:graphql-request@6.1.0";
 export {
   DaggerSDKError,
-  UnknownDaggerError,
   DockerImageRefValidationError,
+  EngineSessionConnectionTimeoutError,
   EngineSessionConnectParamsParseError,
+  EngineSessionError,
+  ERROR_CODES,
   ExecError,
   GraphQLRequestError,
   InitEngineSessionBinaryError,
-  TooManyNestedObjectsError,
-  EngineSessionError,
-  EngineSessionConnectionTimeoutError,
   NotAwaitedRequestError,
-  ERROR_CODES,
+  TooManyNestedObjectsError,
+  UnknownDaggerError,
 } from "./sdk/common/errors/index.ts";
 
 export * as FluentGitlabCI from "jsr:@tsirysndr/fluent-gitlab-ci@0.5";

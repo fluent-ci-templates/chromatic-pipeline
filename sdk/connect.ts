@@ -39,7 +39,7 @@ export interface ConnectParams {
  */
 export async function connect(
   cb: CallbackFct,
-  _config: ConnectOpts = {}
+  _config: ConnectOpts = {},
 ): Promise<void> {
   const ctx = new Context();
   const client = new Client({ ctx: ctx });

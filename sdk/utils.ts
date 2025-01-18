@@ -1,13 +1,13 @@
 // deno-lint-ignore-file no-explicit-any
 import {
   ClientError,
+  ExecError,
   gql,
   GraphQLClient,
   GraphQLRequestError,
+  NotAwaitedRequestError,
   TooManyNestedObjectsError,
   UnknownDaggerError,
-  NotAwaitedRequestError,
-  ExecError,
 } from "../deps.ts";
 
 import { Metadata, QueryTree } from "./client.gen.ts";
@@ -29,7 +29,7 @@ function buildArgs(args: any): string {
       /\{"[a-zA-Z]+":|,"[a-zA-Z]+":/gi,
       (str) => {
         return str.replace(/"/g, "");
-      }
+      },
     );
   };
 
@@ -50,7 +50,7 @@ function buildArgs(args: any): string {
 
       return acc;
     },
-    []
+    [],
   );
 
   if (formattedArgs.length === 0) {
@@ -66,7 +66,7 @@ function buildArgs(args: any): string {
  */
 async function computeNestedQuery(
   query: QueryTree[],
-  client: GraphQLClient
+  client: GraphQLClient,
 ): Promise<void> {
   // Check if there is a nested queryTree to be executed
   const isQueryTree = (value: any) => value["_queryTree"] !== undefined;
@@ -119,7 +119,7 @@ async function computeNestedQuery(
 
           q.args[key] = tmp;
         }
-      })
+      }),
     );
   }
 }
@@ -151,7 +151,7 @@ export function buildQuery(q: QueryTree[]): string {
  */
 export async function computeQuery<T>(
   q: QueryTree[],
-  client: GraphQLClient
+  client: GraphQLClient,
 ): Promise<T> {
   await computeNestedQuery(q, client);
 
@@ -179,7 +179,7 @@ export function queryFlatten<T>(response: any): T {
     // If the response is nested in a way were more than one object is nested inside throw an error
     throw new TooManyNestedObjectsError(
       "Too many nested objects inside graphql response",
-      { response: response }
+      { response: response },
     );
   }
 
@@ -195,14 +195,14 @@ export function queryFlatten<T>(response: any): T {
  */
 export async function compute<T>(
   query: string,
-  client: GraphQLClient
+  client: GraphQLClient,
 ): Promise<T> {
   let computeQuery: Awaited<T>;
   try {
     computeQuery = await client.request(
       gql`
         ${query}
-      `
+      `,
     );
   } catch (e: any) {
     if (e instanceof ClientError) {
@@ -229,14 +229,14 @@ export async function compute<T>(
     if (e.errno === "ECONNREFUSED") {
       throw new NotAwaitedRequestError(
         "Encountered an error while requesting data via graphql through a synchronous call. Make sure the function called is awaited.",
-        { cause: e }
+        { cause: e },
       );
     }
 
     // Just throw the unknown error
     throw new UnknownDaggerError(
       "Encountered an unknown error while requesting data via graphql",
-      { cause: e }
+      { cause: e },
     );
   }
 

@@ -16,7 +16,7 @@ export function initDefaultContext(): Context {
     const sessionToken = env.get("DAGGER_SESSION_TOKEN");
     if (!sessionToken) {
       throw new Error(
-        "DAGGER_SESSION_TOKEN must be set when using DAGGER_SESSION_PORT"
+        "DAGGER_SESSION_TOKEN must be set when using DAGGER_SESSION_PORT",
       );
     }
 

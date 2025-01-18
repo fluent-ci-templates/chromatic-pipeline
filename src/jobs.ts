@@ -3,8 +3,8 @@
  * @description Deploy storybook to Chromatic
  */
 
-import { dag, env, exit, Directory, Secret } from "../../deps.ts";
-import { getDirectory, getChromaticToken } from "./lib.ts";
+import { dag, Directory, env, exit, Secret } from "../deps.ts";
+import { getChromaticToken, getDirectory } from "./helpers.ts";
 
 export enum Job {
   publish = "publish",
@@ -23,7 +23,7 @@ export const exclude = [".devbox", "node_modules", ".fluentci"];
  */
 export async function publish(
   src: string | Directory,
-  token: string | Secret
+  token: string | Secret,
 ): Promise<string> {
   const context = await getDirectory(src);
   const VERSION = env.get("CHROMATIC_VERSION") || "latest";
@@ -62,7 +62,7 @@ export async function publish(
 
 export type JobExec = (
   src: string | Directory,
-  token: string | Secret
+  token: string | Secret,
 ) => Promise<string>;
 
 export const runnableJobs: Record<Job, JobExec> = {
